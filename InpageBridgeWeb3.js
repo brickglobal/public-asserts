@@ -138,10 +138,11 @@ class InpageBridge {
 				this._onMessage(data);
 			}
 		});
-
-		window.addEventListener('load', () => {
-			this._ping();
-		});
+		if (window.ReactNativeWebView.postMessage){
+			this._ping();   
+		} else {
+			setTimeout(function(){ this._ping(); }, 3000);
+		}
 	}
 
 	/**
